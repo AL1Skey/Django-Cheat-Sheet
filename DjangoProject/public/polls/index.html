@@ -1,0 +1,42 @@
+{% extends 'based.html' %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block contents %}
+    <h1 class="mb-3 text-center">
+        Polls Question
+    </h1>
+    {% if polls_database %}
+        {% for poll in polls_database %}
+        <div class="row">
+            <div class="col-1 text-secondary text-center fs-2">
+                <strong>
+                    {{forloop.counter}}
+                    <br>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M2.75 6a.75.75 0 000 1.5h18.5a.75.75 0 000-1.5H2.75zM6 11.75a.75.75 0 01.75-.75h10.5a.75.75 0 010 1.5H6.75a.75.75 0 01-.75-.75zm4 4.938a.75.75 0 01.75-.75h2.5a.75.75 0 010 1.5h-2.5a.75.75 0 01-.75-.75z"></path></svg>
+                    </span>
+                </strong>
+                
+            </div>
+            <div class="card mb-3 col">
+                <div class="card-body">
+                    <p class="lead">{{poll.quest_text}}</p>
+                    <a href="{% url 'polls:details' poll.id %}" class="btn btn-primary btn-sm">Vote Now</a>
+                    <a href="{% url 'polls:result' poll.id %}" class="btn btn-primary btn-sm">Result</a>
+                    <br>
+                    <small> added {{poll.pub_date}}</small>
+                </div>
+            </div>
+        </div>
+            
+        {% endfor %}
+    {% else %}
+        <p>
+            No Polls Avaliable
+        </p>
+    {% endif %}
+
+{% endblock %}

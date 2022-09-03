@@ -1,5 +1,5 @@
-# What is This?
-It's Django Cheat Sheet
+# Django Cheat Sheet
+This is my version of Django Cheat Sheet. This app are pollster app. It used to make polls.
 # How you build this?
 So to build this
 - Install python
@@ -67,6 +67,62 @@ What’s the difference between a project and an app? An app is a web applicatio
 - #### view.py
     - It manage front-end of website, the admin otherhands
 
-# How the inside code works ?
-- The class are used to make the section of data
-- In class there is attribute that you made like question,option etc.
+# How to make basic apps in nutshell?
+- Make the models in models.py
+- Register the models in admin.py
+- import html template in views.py
+- make urls.py inside the app and import all views.py function to insert html template page
+- add apps.py inside the settings.py in ***INSTALLED APPS*** variable 
+    - the format is '<app-name>.apps.<Appname>Config'
+- import os inside settings.py if not imported by default
+- add template directory in ***TEMPLATE*** variable
+    - add this in **DIR** keys 
+    ```python
+        TEMPLATE = {......
+                    'DIRS':[os.path.join(BASE_DIR,'<template-path>')]
+                    .....
+                    }
+    ```
+- make migration
+```cmd
+python manage.py makemigrations 
+```
+- migrate the model to database
+```cmd
+python manage.py migrate 
+```
+- run the server
+```cmd
+python manage.py runserver
+```
+
+# Django Template programming
+
+***Folder hierarchy***
+```
+└───public
+        ├───nothing
+        │       file.html
+        │
+        └───polls
+                index.html
+                result.html
+```
+
+***This will create local template called somt (for now, treat it as file.html)***
+```html
+<!-- in file.html -->
+{% block somt %}
+{% endblock %}
+```
+
+***This will extract html file(in this example it will) and add 'something' in block called 'somt'***
+```html
+<!-- in polls/index.html -->
+{% extend 'nothing/file.html' %}
+
+{% block somt %}
+    Something
+{% endblock %}
+```
+

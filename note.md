@@ -35,3 +35,18 @@
 ```cmd
     python manage.py createsuperuser
 ```
+- __str__ in python class modules are used for displaying the name of data, and to avoid print the id
+```python
+    #Without __str__
+    class Something:
+        ....
+```
+> It will return Something object(id)
+```python
+    #With __str__
+    class Something:
+        ....
+        def __str__(self):
+            return "Jonathan"
+```
+> It will return Jonathan every data created with Something class

@@ -1,0 +1,28 @@
+{% extends 'based.html' %}
+
+{% block title%}
+Result
+{% endblock %}
+
+{% block contents %}
+
+<div class="card mt-5">
+    <div class="card-body">
+        <h1 class="text-center">Result</h1>
+        <a href="{% url 'polls:index' %}" class="btn btn-danger btn-sm">Go back </a>
+
+        <ul class="list-group">
+            {% for opt in quest.option_set.all() %}
+                <li class="list-group-item" >
+                    {{ opt.choice_text }} <span class="badge badge-sucess float-right">
+                        {{opt.votes}} vote{{opt.votes | pluralize}}
+                    </span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<a href="{% url 'polls:details' latest_polls.id %}" class="btn btn-secondary">Vote again?</a>
+
+{% endblock %}
